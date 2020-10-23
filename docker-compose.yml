@@ -1,0 +1,24 @@
+#
+# single-node
+# docker-compose up -d
+# docker exec -it localmongo1 mongo --eval 'rs.initiate({ _id: "rs0", members: [{_id: 0, host: "mongo-rs0:27017"}]})'
+# docker exec -it localmongo1 mongo --eval 'rs.status()'
+# node transaction.js
+#
+version: "3"
+services:
+  mongo1:
+    hostname: mongo1
+    container_name: localmongo1
+    environment:
+      MONGO_INITDB_DATABASE: test
+      MONGO_REPLICA_SET_NAME: rs0
+    extra_hosts:
+      - "mongo-rs0:172.30.1.15"
+    image: mongo:latest
+    expose:
+      - 27017
+    ports:
+      - 27017:27017
+    restart: always
+    entrypoint: [ "/usr/bin/mongod", "--bind_ip_all", "--replSet", "rs0" ]

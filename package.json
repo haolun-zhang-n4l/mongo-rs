@@ -1,0 +1,13 @@
+{
+  "name": "@n4l/mongo-rs",
+  "version": "0.0.0",
+  "description": "",
+  "scripts": {
+    "start": "node transaction.js"
+  },
+  "author": "N4L",
+  "dependencies": {
+    "mongodb": "^3.6.2"
+  },
+  "devDependencies": {}
+}
